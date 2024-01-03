@@ -477,7 +477,7 @@ Local<Value> ODBC::GetColumnValue( SQLHSTMT hStmt, Column column,
         return scope.Escape(Nan::New<Date>((double(timegm(&timeInfo)) * 1000)
                           + (odbcTime.fraction / 1000000)).ToLocalChecked());
 #else
-#ifdef _AIX
+#ifndef timelocal
     #define timelocal mktime
 #endif
         return scope.Escape(Nan::New<Date>((double(timelocal(&timeInfo)) * 1000)
